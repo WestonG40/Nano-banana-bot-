@@ -1,0 +1,11 @@
+{
+  "name": "NanoBot Voice AI",
+  "description": "A real-time audio computer nano bot powered by Gemini 3 Flash with interactive voice animations.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera",
+    "autoplay",
+    "speaker-selection",
+    "screen-wake-lock"
+  ]
+}
