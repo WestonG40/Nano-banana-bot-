@@ -18,3 +18,7 @@ View your app in AI Studio: https://ai.studio/apps/ec7cac08-0cff-46d0-805c-ce210
 2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
 3. Run the app:
    `npm run dev`
+
+## Notes
+
+This branch contains the next set of updates for the Nano Banana Bot application.
