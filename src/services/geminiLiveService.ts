@@ -1,4 +1,5 @@
-import { GoogleGenAI, LiveServerMessage, Modality } from "@google/genai";
+import { LiveServerMessage, Modality } from "@google/genai";
+import { initializeGeminiClient, getDefaultGeminiModel } from "./geminiApi";
 
 export interface LiveSession {
   sendRealtimeInput: (data: { media: { data: string; mimeType: string } }) => void;
@@ -29,18 +30,14 @@ export const connectToGeminiLive = (
   history: ChatMessage[] = [],
   settings: VoiceSettings = { voiceName: "Zephyr", speechRate: 1.0 }
 ): Promise<LiveSession> => {
-  const apiKey = process.env.GEMINI_API_KEY;
-  if (!apiKey) {
-    throw new Error("GEMINI_API_KEY is not defined in the environment.");
-  }
-  const ai = new GoogleGenAI({ apiKey });
+  const ai = initializeGeminiClient();
 
   const historyContext = history.length > 0 
     ? `\n\nRecent conversation history for context:\n${history.map(m => `${m.role.toUpperCase()}: ${m.text}`).join('\n')}`
     : "";
 
   return ai.live.connect({
-    model: "gemini-2.5-flash-native-audio-preview-12-2025",
+    model: getDefaultGeminiModel(),
     config: {
       responseModalities: [Modality.AUDIO],
       speechConfig: {
